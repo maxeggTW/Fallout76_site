@@ -1,0 +1,617 @@
+<style>
+    .main-container {
+      background-color: rgba(108, 123, 255, 1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .header {
+      display: flex;
+      flex-direction: column;
+      border-radius: 0;
+      box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+      position: relative;
+      min-height: 107px;
+      width: 100%;
+      align-items: flex-start;
+      gap: 20px;
+      font-family: Inter, sans-serif;
+      color: rgba(0, 0, 0, 1);
+      font-weight: 400;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 13px 80px 0 16px;
+    }
+    @media (max-width: 991px) {
+      .header {
+        max-width: 100%;
+        padding-right: 20px;
+      }
+    }
+    .header-background {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .logo-container {
+      position: relative;
+      align-self: start;
+      display: flex;
+      gap: 40px 100px;
+      font-size: 80px;
+      white-space: nowrap;
+    }
+    @media (max-width: 991px) {
+      .logo-container {
+        max-width: 100%;
+        font-size: 40px;
+        white-space: initial;
+      }
+    }
+    .logo-icon {
+      aspect-ratio: 1;
+      object-fit: contain;
+      object-position: center;
+      width: 48px;
+      margin: auto 0;
+    }
+    
+    @media (max-width: 991px) {
+      .logo-text {
+        font-size: 40px;
+      }
+    }
+    .signin-button {
+      position: relative;
+      border-radius: 41px;
+      background-color: rgba(255, 241, 149, 1);
+      display: flex;
+      font-size: 20px;
+      margin: auto 0;
+      padding: 5px 25px;
+    }
+    @media (max-width: 991px) {
+      .signin-button {
+        padding-left: 20px;
+      }
+    }
+    .signin-text {
+      flex-grow: 1;
+      margin: auto 0;
+    }
+    .signin-icon {
+      aspect-ratio: 1;
+      object-fit: contain;
+      object-position: center;
+      width: 48px;
+      border-radius: 41px;
+    }
+    .hero-section {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      min-height: 870px;
+      width: 100%;
+      align-items: flex-end;
+      padding: 415px 68px 22px;
+    }
+    @media (max-width: 991px) {
+      .hero-section {
+        max-width: 100%;
+        padding: 100px 20px 0;
+      }
+    }
+    .hero-background {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .hero-controls {
+      position: relative;
+      align-self: stretch;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    @media (max-width: 991px) {
+      .hero-controls {
+        max-width: 100%;
+      }
+    }
+    .control-left {
+      aspect-ratio: 0.57;
+      object-fit: contain;
+      object-position: center;
+      width: 24px;
+    }
+    .control-right {
+      aspect-ratio: 0.57;
+      object-fit: contain;
+      object-position: center;
+      width: 24px;
+    }
+    .hero-title {
+      position: relative;
+      color: rgba(255, 0, 4, 1);
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      margin-top: 86px;
+      font: 400 96px Inter, sans-serif;
+      border: 1px solid rgba(210, 115, 115, 1);
+    }
+    @media (max-width: 991px) {
+      .hero-title {
+        max-width: 100%;
+        font-size: 40px;
+        margin: 40px 3px 0 0;
+      }
+    }
+    .cta-button {
+      position: relative;
+      border-radius: 49px;
+      background-color: rgba(239, 235, 14, 1);
+      color: rgba(191, 0, 0, 1);
+      white-space: nowrap;
+      margin: 31px 152px 0 0;
+      padding: 37px 70px;
+      font: 400 70px Inter, sans-serif;
+      border: 5px solid rgba(255, 255, 255, 1);
+    }
+    @media (max-width: 991px) {
+      .cta-button {
+        font-size: 40px;
+        max-width: 100%;
+        margin-right: 10px;
+        white-space: initial;
+        padding: 0 20px;
+      }
+    }
+    .social-bar {
+      background-color: rgba(60, 57, 57, 1);
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      display: flex;
+      width: 1919px;
+      max-width: 100%;
+      gap: 40px 100px;
+      flex-wrap: wrap;
+      padding: 28px 69px 17px;
+    }
+    @media (max-width: 991px) {
+      .social-bar {
+        padding: 0 20px;
+      }
+    }
+    .social-title {
+      color: rgba(255, 255, 255, 1);
+      flex-grow: 1;
+      width: 365px;
+      margin: auto 0;
+      font: 700 45px Inter, sans-serif;
+      border: 1px solid rgba(53, 53, 53, 1);
+    }
+    @media (max-width: 991px) {
+      .social-title {
+        max-width: 100%;
+        font-size: 40px;
+      }
+    }
+    .social-icons {
+      display: flex;
+      align-items: center;
+      gap: 40px 106px;
+      justify-content: start;
+      flex-wrap: wrap;
+    }
+    @media (max-width: 991px) {
+      .social-icons {
+        max-width: 100%;
+      }
+    }
+    .social-icon {
+      aspect-ratio: 1;
+      object-fit: contain;
+      object-position: center;
+      width: 72px;
+      align-self: stretch;
+      margin: auto 0;
+    }
+    .social-icon-2 {
+      aspect-ratio: 0.55;
+      object-fit: contain;
+      object-position: center;
+      width: 33px;
+      align-self: stretch;
+      margin: auto 0;
+    }
+    .social-icon-3 {
+      aspect-ratio: 1.3;
+      object-fit: contain;
+      object-position: center;
+      width: 95px;
+      align-self: stretch;
+      margin: auto 0;
+    }
+    .social-icon-4 {
+      aspect-ratio: 1.22;
+      object-fit: contain;
+      object-position: center;
+      width: 66px;
+      align-self: stretch;
+      margin: auto 0;
+    }
+    .social-icon-5 {
+      aspect-ratio: 0.9;
+      object-fit: contain;
+      object-position: center;
+      width: 54px;
+      align-self: stretch;
+      margin: auto 0;
+    }
+    .nav-container {
+      border-radius: 61px;
+      background-color: rgba(255, 226, 108, 1);
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      align-self: center;
+      display: flex;
+      margin-top: 74px;
+      width: 1379px;
+      max-width: 100%;
+      flex-direction: column;
+      align-items: start;
+      color: rgba(0, 0, 0, 1);
+      justify-content: center;
+      padding: 56px 60px;
+      font: 400 30px Inter, sans-serif;
+    }
+    @media (max-width: 991px) {
+      .nav-container {
+        margin-top: 40px;
+        padding: 0 20px;
+      }
+    }
+    .nav-items {
+      display: flex;
+      min-height: 74px;
+      width: 1194px;
+      max-width: 100%;
+      align-items: center;
+      gap: 40px 71px;
+      justify-content: start;
+    }
+    .nav-item {
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      align-self: stretch;
+      position: relative;
+      display: flex;
+      min-height: 74px;
+      align-items: flex-start;
+      gap: 10px;
+      justify-content: center;
+      width: 200px;
+      margin: auto 0;
+      padding: 19px 35px;
+    }
+    @media (max-width: 991px) {
+      .nav-item {
+        padding: 0 20px;
+      }
+    }
+    .nav-item-bg {
+      border-radius: 74px;
+      background-color: rgba(255, 255, 255, 1);
+      align-self: start;
+      position: absolute;
+      z-index: 0;
+      display: flex;
+      width: 200px;
+      height: 74px;
+      right: 0px;
+      bottom: 0px;
+    }
+    .nav-item-text {
+      z-index: 0;
+      margin: auto 0;
+    }
+    .content-section {
+      align-self: center;
+      display: flex;
+      margin-top: 95px;
+      width: 100%;
+      max-width: 1379px;
+      flex-direction: column;
+      align-items: start;
+      padding: 0 43px;
+    }
+    @media (max-width: 991px) {
+      .content-section {
+        max-width: 100%;
+        margin-top: 40px;
+        padding: 0 20px;
+      }
+    }
+    .content-header {
+      display: flex;
+      gap: 7px;
+      color: rgba(0, 0, 0, 1);
+      white-space: nowrap;
+      font: 400 45px Inter, sans-serif;
+    }
+    @media (max-width: 991px) {
+      .content-header {
+        font-size: 40px;
+        white-space: initial;
+      }
+    }
+    .content-title {
+      flex-grow: 1;
+    }
+    @media (max-width: 991px) {
+      .content-title {
+        font-size: 40px;
+      }
+    }
+    .content-icon {
+      aspect-ratio: 0.57;
+      object-fit: contain;
+      object-position: center;
+      width: 20px;
+      margin: auto 0;
+    }
+    .content-grid {
+      margin: 43px 0 0 19px;
+    }
+    @media (max-width: 991px) {
+      .content-grid {
+        max-width: 100%;
+        margin-top: 40px;
+      }
+    }
+    .content-row {
+      gap: 20px;
+      display: flex;
+    }
+    @media (max-width: 991px) {
+      .content-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0px;
+      }
+    }
+    .content-column {
+      display: flex;
+      flex-direction: column;
+      line-height: normal;
+      width: 33%;
+      margin-left: 0px;
+    }
+    @media (max-width: 991px) {
+      .content-column {
+        width: 100%;
+      }
+    }
+    .content-item {
+      border-radius: 44px;
+      background-color: rgba(217, 217, 217, 1);
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      display: flex;
+      width: 379px;
+      max-width: 100%;
+      height: 226px;
+      margin: 0 auto;
+    }
+    @media (max-width: 991px) {
+      .content-item {
+        margin-top: 40px;
+      }
+    }
+    .blue-section {
+      border-radius: 50px;
+      background-color: rgba(80, 93, 160, 1);
+      display: flex;
+      min-height: 1352px;
+      margin-top: 207px;
+      width: 100%;
+    }
+    @media (max-width: 991px) {
+      .blue-section {
+        max-width: 100%;
+        margin-top: 40px;
+      }
+    }
+    .blue-content {
+      align-self: center;
+      margin-top: 60px;
+      width: 100%;
+      max-width: 1815px;
+    }
+    @media (max-width: 991px) {
+      .blue-content {
+        max-width: 100%;
+        margin-top: 40px;
+      }
+    }
+    .blue-row {
+      gap: 20px;
+      display: flex;
+    }
+    @media (max-width: 991px) {
+      .blue-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0px;
+      }
+    }
+    .blue-column {
+      display: flex;
+      flex-direction: column;
+      line-height: normal;
+      width: 50%;
+      margin-left: 0px;
+    }
+    @media (max-width: 991px) {
+      .blue-column {
+        width: 100%;
+      }
+    }
+    .blue-item {
+      border-radius: 46px;
+      background-color: rgba(217, 217, 217, 1);
+      display: flex;
+      width: 849px;
+      max-width: 100%;
+      height: 955px;
+      margin: 0 auto;
+    }
+    @media (max-width: 991px) {
+      .blue-item {
+        margin-top: 40px;
+      }
+    }
+    .footer {
+      background-color: rgba(46, 34, 175, 1);
+      margin-top: 184px;
+      width: 100%;
+      color: rgba(0, 0, 0, 1);
+      white-space: nowrap;
+      padding: 493px 70px 91px;
+      font: 400 80px Inter, sans-serif;
+    }
+    @media (max-width: 991px) {
+      .footer {
+        font-size: 40px;
+        max-width: 100%;
+        margin-top: 40px;
+        white-space: initial;
+        padding: 100px 20px 0;
+      }
+    }
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+  
+  <div class="main-container">
+    <header class="header">
+      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/ce6c55d842a05448a2a5dafcfff140bf9b1ff47eef19b5f28e64bbfa10106372?placeholderIfAbsent=true&apiKey=5fbfed1df25345b8943b44188aa4f5ba" class="header-background" alt="Header background" />
+      <div class="logo-container">
+        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/9629e27fc2482e472fb20ad928cf93c223741e6dc7746d6d85f9829eaf8ffb87?placeholderIfAbsent=true&apiKey=5fbfed1df25345b8943b44188aa4f5ba" class="logo-icon" alt="Logo icon" />
+        <div class="logo-text">LOGO</div>
+      </div>
+      <button class="signin-button">
+        <span class="signin-text">SIGN IN</span>
+        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/1a03805e296c077b72a192581897bccf1c8a9e0a257bdd90e3d950d415473fbe?placeholderIfAbsent=true&apiKey=5fbfed1df25345b8943b44188aa4f5ba" class="signin-icon" alt="Sign in icon" />
+      </button>
+    </header>
+    <section class="hero-section">
+      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/e98204c40e695efe1b6ee3d06289a293cd73b4668c14d2916abedc02bed8e0fa?placeholderIfAbsent=true&apiKey=5fbfed1df25345b8943b44188aa4f5ba" class="hero-background" alt="Hero background" />
+      <div class="hero-controls">
+        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/f4dba78b098507d82086312c20bbfd8db6183371eb218307c48f427945d1e644?placeholderIfAbsent=true&apiKey=5fbfed1df25345b8943b44188aa4f5ba" class="control-left" alt="Left control" />
+        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/85aa9d9ba68bf0bd5d2eb7084a0c69ae3bc08f22181e8258ccd6e484c2e3fa80?placeholderIfAbsent=true&apiKey=5fbfed1df25345b8943b44188aa4f5ba" class="control-right" alt="Right control" />
+      </div>
+      <h1 class="hero-title">還沒有Fallout76?</h1>
+      <button class="cta-button">立即購買</button>
+    </section>
+    <div class="social-bar">
+      <h2 class="social-title">避難所科技指引(社群):</h2>
+      <div class="social-icons">
+        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/245596209ac8e6eccbbaf5fe6694cf9339e12b72a458199d0f832c2c938df6aa?placeholderIfAbsent=true&apiKey=5fbfed1df25345b8943b44188aa4f5ba" class="social-icon" alt="Social icon 1" />
+        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/d0996a4b12fcf6fe66d279710394f968c9b158fad5b4c0e0e444b360afb0bda0?placeholderIfAbsent=true&apiKey=5fbfed1df25345b8943b44188aa4f5ba" class="social-icon-2" alt="Social icon 2" />
+        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/d9344b7080c472b7cf1bc11d9a4601819ea17f0877b6dc3dcd185c9df1458e75?placeholderIfAbsent=true&apiKey=5fbfed1df25345b8943b44188aa4f5ba" class="social-icon-3" alt="Social icon 3" />
+        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/3093775811f700cde6680fe6d23a2cdd12984c96276a6069456ab5837bbc562a?placeholderIfAbsent=true&apiKey=5fbfed1df25345b8943b44188aa4f5ba" class="social-icon-4" alt="Social icon 4" />
+        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/32565d58d3b98e972d479f66399db93ff98c96f3f1ad9b4fc71f0d750cc968f7?placeholderIfAbsent=true&apiKey=5fbfed1df25345b8943b44188aa4f5ba" class="social-icon-5" alt="Social icon 5" />
+      </div>
+    </div>
+    <nav class="nav-container">
+      <ul class="nav-items">
+        <li class="nav-item">
+          <div class="nav-item-bg"></div>
+          <a href="#" class="nav-item-text">新手入門</a>
+        </li>
+        <li class="nav-item">
+          <div class="nav-item-bg"></div>
+          <a href="#" class="nav-item-text">實用資訊</a>
+        </li>
+        <li class="nav-item">
+          <div class="nav-item-bg"></div>
+          <a href="#" class="nav-item-text">流派分享</a>
+        </li>
+        <li class="nav-item">
+          <div class="nav-item-bg"></div>
+          <a href="#" class="nav-item-text">每周核彈碼</a>
+        </li>
+        <li class="nav-item">
+          <div class="nav-item-bg"></div>
+          <a href="#" class="nav-item-text">其他資訊</a>
+        </li>
+      </ul>
+    </nav>
+    <section class="content-section">
+      <div class="content-header">
+        <h2 class="content-title">新手入門</h2>
+        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/cef88012667cba88c56159b8c03c97da51f7f2422e2b5a26bbff420e5413e4ca?placeholderIfAbsent=true&apiKey=5fbfed1df25345b8943b44188aa4f5ba" class="content-icon" alt="Content icon" />
+      </div>
+      <div class="content-grid">
+        <div class="content-row">
+          <div class="content-column">
+            <div class="content-item" role="img" aria-label="Content item 1"></div>
+          </div>
+          <div class="content-column">
+            <div class="content-item" role="img" aria-label="Content item 2"></div>
+          </div>
+          <div class="content-column">
+            <div class="content-item" role="img" aria-label="Content item 3"></div>
+          </div>
+        </div>
+      </div>
+      <div class="content-grid">
+        <div class="content-row">
+          <div class="content-column">
+            <div class="content-item" role="img" aria-label="Content item 4"></div>
+          </div>
+          <div class="content-column">
+            <div class="content-item" role="img" aria-label="Content item 5"></div>
+          </div>
+          <div class="content-column">
+            <div class="content-item" role="img" aria-label="Content item 6"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="blue-section">
+      <div class="blue-content">
+        <div class="blue-row">
+          <div class="blue-column">
+            <div class="blue-item" role="img" aria-label="Blue content item 1"></div>
+          </div>
+          <div class="blue-column">
+            <div class="blue-item" role="img" aria-label="Blue content item 2"></div>
+          </div>
+        </div>
+      </div>
+      <div class="blue-content">
+        <div class="blue-row">
+          <div class="blue-column">
+            <div class="blue-item" role="img" aria-label="Blue content item 3"></div>
+          </div>
+          <div class="blue-column">
+            <div class="blue-item" role="img" aria-label="Blue content item 4"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="footer">FOOTER</footer>
+  </div>

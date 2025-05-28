@@ -1,0 +1,351 @@
+<?php
+require_once("Connections/conn_db.php"); // 載入 PDO 連線 ($link 變數)
+// require_once("php_lib.php"); // 如果需要其他函數庫
+// (!isset($_SESSION)) ? session_start() : ""; // 如果需要 Session
+
+$image_directory = './IMAGES/';
+?>
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fallout 76 網站</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+    crossorigin="anonymous" />
+  <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v6.2.1/css/
+  all.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <link rel="stylesheet" href="./Website_02.css" />
+</head>
+
+<body>
+  <section class="header">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container-fluid">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <a href="index_P01.php" class="img-logo" ><img src="./IMAGES/logo.png" alt="logo" class="logo"/></a>
+            <li class="nav-item">
+              <a class="nav-link" href="#">遊戲攻略</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">玩家特區</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">客服中心</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index_P01.php">回首頁</a>
+            </li>
+          </ul>
+          <ul class="navbar-icon ul">
+            <div class="nav-item">
+              <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+              <a class="nav-link" href="#"><i class="fa-solid fa-user"></i></a>
+              <a class="nav-link" href="#"><i class="fa-solid fa-basket-shopping"></i></a>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="header-image">
+      <img
+        src="./IMAGES/vault_boy.png"
+        alt="header-image"
+        class="header-image" />
+    </div>
+    <div class="header-text">
+      <h1 class="header-text-title1">Fallout 76</h1>
+      <h1 class="header-text-title2">周邊商品</h1>
+      <p>
+        穿梭廢土也要風格滿分！探索我們獨家推出的《異塵餘生》 （Fallout）主題商品系列，從服飾、配件到收藏品一應俱全!
+      </p>
+    </div>
+    <div class="scroll-down-container">
+      <div class="pipboy-arrow-down" title="向下捲動"></div>
+    </div>
+  </section>
+  <section class="content">
+    <div class="container">
+      <div class="hot-sale">
+        <div class="hot-sale-title">
+          <img src="./IMAGES/caps.png" alt="caps" class="caps" />
+          <h3>主打商品，強力販售中</h3>
+          <img src="./IMAGES/caps.png" alt="caps" class="caps" />
+        </div>
+        <div class="hot-sale-merch">
+          <div class="merch-item">
+            <img src="./IMAGES/hotmerch1.webp" alt="merch1"/>
+            <div class="hotmerch-text">
+              <h2>Fallout Pip-Boy 1:1 Replica</h2>
+              <h3>嗶嗶小子 1:1模型</h3>
+
+            </div>
+            <button class="merch-btn">查看商品</button>
+          </div>
+
+          <div class="merch-item">
+            <img src="./IMAGES/hotmerch2.webp" alt="merch2" class="hotmerch2" />
+            <div class="hotmerch-text">
+              <h2>Fallout Power Armor 1:1 Replica</h2>
+              <h3>動力裝甲 1:1模型</h3>
+
+            </div>
+            <button class="merch-btn">查看商品</button>
+          </div>
+
+          <div class="merch-item">
+            <img src="./IMAGES/hotmerch3.webp" alt="merch3" class="hotmerch3" />
+            <div class="hotmerch-text">
+              <h2>Fallout Nuka-Cola Collection</h2>
+              <h3>核子可樂收藏組</h3>
+
+            </div>
+            <button class="merch-btn">查看商品</button>
+          </div>
+
+          <div class="merch-item">
+            <img src="./IMAGES/hotmerch4.webp" alt="merch4" class="hotmerch4" />
+            <div class="hotmerch-text">
+              <h2>Fallout Vault Boy Bobblehead</h2>
+              <h3>嗶嗶小子搖頭公仔</h3>
+
+            </div>
+            <button class="merch-btn">查看商品</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="preorder">
+        <div class="preorder-title">
+          <h3>限量預購中</h3>
+          <img src="./IMAGES/caps.png" alt="caps" class="caps" />
+        </div>
+        <div class="preorder-merch">
+          <a href="main_product.php?id=1" style="text-decoration: none; color: inherit; display: contents;">
+            <div class="preorder-item">
+              <img src="./IMAGES/preorder1.webp" alt="preorder1" class="preorder1" />
+              <div class="preorder-text">
+                <h2>嗜吞娃娃魚(Gulper)玩偶</h2>
+                <h3>NT$900</h3>
+              </div>
+            </div>
+          </a>
+          <div class="preorder-item">
+            <img src="./IMAGES/preorder2.webp" alt="preorder2" class="preorder2" />
+            <div class="preorder-text">
+              <h2>廢土氣泡俱樂部：核子可樂大禮包</h2>
+              <h3>NT$3500</h3>
+            </div>
+          </div>
+          <div class="preorder-item">
+            <img src="./IMAGES/preorder3.webp" alt="preorder3" class="preorder3" />
+            <div class="preorder-text">
+              <h2>《異塵餘生》系列露西 PVC 公仔</h2>
+              <h3>NT$1500</h3>
+            </div>
+          </div>
+          <div class="preorder-item">
+            <img src="./IMAGES/preorder4.webp" alt="preorder4" class="preorder4" />
+            <div class="preorder-text">
+              <h2>《異塵餘生》系列屍鬼 PVC 公仔</h2>
+              <h3>NT$1500</h3>
+            </div>
+          </div>
+          <div class="preorder-item">
+            <img src="./IMAGES/preorder5.webp" alt="preorder5" class="preorder5" />
+            <div class="preorder-text">
+              <h2>《異塵餘生》系列麥辛姆斯 PVC 公仔</h2>
+              <h3>NT$1500</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hot-sale">
+        <div class="hot-sale-title">
+          <h3>強力熱銷中</h3>
+          <img src="./IMAGES/caps.png" alt="caps" class="caps" />
+        </div>
+        <div class="preorder-merch">
+          <div class="preorder-item">
+            <img src="./IMAGES/hot1.webp" alt="preorder1" class="preorder1" />
+            <div class="preorder-text">
+              <h2>避難所小子搖頭娃娃</h2>
+              <h3>NT$500</h3>
+            </div>
+          </div>
+          <div class="preorder-item">
+            <img src="./IMAGES/hot2.webp" alt="preorder2" class="preorder2" />
+            <div class="preorder-text">
+              <h2>Vault-Tec 系列機能休閒褲</h2>
+              <h3>NT$1750</h3>
+            </div>
+          </div>
+          <div class="preorder-item">
+            <img src="./IMAGES/hot3.webp" alt="preorder3" class="preorder3" />
+            <div class="preorder-text">
+              <h2>資深遊騎兵戰術背包</h2>
+              <h3>NT$1950</h3>
+            </div>
+          </div>
+          <div class="preorder-item">
+            <img src="./IMAGES/hot4.webp" alt="preorder4" class="preorder4" />
+            <div class="preorder-text">
+              <h2>復古「Please Stand By」黑膠墊片</h2>
+              <h3>NT$480</h3>
+            </div>
+          </div>
+          <div class="preorder-item">
+            <img src="./IMAGES/hot5.webp" alt="preorder5" class="preorder5" />
+            <div class="preorder-text">
+              <h2>糖衣麥片炸彈早餐組合</h2>
+              <h3>NT$1800</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bigsale">
+        <div class="bigsale-title">
+          <h1>全館限時5折優惠!</h1>
+          <p>優惠截止日期:2077年10月23日前</p>
+        </div>
+      </div>
+
+      <div class="comment">
+        <div class="comment-left">
+          <img src="./IMAGES/comment_Boy.png" alt="comment_Boy" class="comment_Boy">
+          <img src="./IMAGES/5star.png" alt="5starL" class="five-starL">
+          <div class="comment-text">
+            <h3>品質優良，廢土良伴，不買都不行</h3>
+            <p>-來自某不知名廢土人</p>
+          </div>
+        </div>
+        <div class="comment-right">
+          <img src="./IMAGES/comment_Girl.png" alt="comment_Girl" class="comment_Girl">
+          <img src="./IMAGES/5star.png" alt="5starR" class="five-starR">
+          <div class="comment-text">
+            <h3>商品跟我的衣服很搭，強力推薦!</h3>
+            <p>-來自某不知名廢土人</p>
+          </div>
+        </div>
+        <div class="disclaimer">
+          <p>此商品頁僅供設計展示，並未實際銷售</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="outsidelink">
+    <div class="outsidelink-title">
+      <h2>本站玩家專屬連結</h2>
+      <img
+        src="./IMAGES/Vault-Tec.svg.png"
+        alt="vaultLogo"
+        class="vaultLogo" />
+    </div>
+
+    <div class="links-container">
+      <img src="./IMAGES/gR.png" alt="齒輪左" class="gear-left" />
+      <img src="./IMAGES/gL.png" alt="齒輪右" class="gear-right" />
+      <img src="./IMAGES/link1.png" alt="連結1" class="link1" />
+      <img src="./IMAGES/link2.png" alt="連結2" class="link2" />
+      <img src="./IMAGES/link3.png" alt="連結3" class="link3" />
+    </div>
+  </section>
+
+  <section class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h2>Fallout76中文資訊網</h2>
+        <div class="social-icons">
+          <div class="social-icon">
+            <i class="fa-brands fa-instagram"></i>
+          </div>
+          <div class="social-icon">
+            <i class="fa-brands fa-facebook-f"></i>
+          </div>
+          <div class="social-icon">
+            <i class="fa-brands fa-youtube"></i>
+          </div>
+          <div class="social-icon">
+            <i class="fa-brands fa-discord"></i>
+          </div>
+          <div class="social-icon">
+            <i class="fa-brands fa-x-twitter"></i>
+          </div>
+          <div class="social-icon">
+            <i class="fa-brands fa-twitch"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-policy">
+      <p>© 2025 - 2025 Fallout76中文資訊網Contact. Privacy Policy.</p>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 獲取箭頭元素
+      const scrollDownContainer = document.querySelector('.scroll-down-container');
+      const footer = document.querySelector('.footer');
+
+      // 監聽滾動事件
+      window.addEventListener('scroll', function() {
+        const footerRect = footer.getBoundingClientRect();
+
+        // 當滾動到 footer 時
+        if (footerRect.top <= window.innerHeight) {
+          // 改變箭頭方向（向上）
+          scrollDownContainer.style.transform = 'translateX(-50%) rotate(180deg)';
+        } else {
+          // 恢復箭頭方向（向下）
+          scrollDownContainer.style.transform = 'translateX(-50%)';
+        }
+      });
+
+      // 箭頭點擊事件
+      scrollDownContainer.addEventListener('click', function() {
+        const footerRect = footer.getBoundingClientRect();
+
+        if (footerRect.top <= window.innerHeight) {
+          // 如果在 footer 附近，點擊回到頂部
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        } else {
+          // 否則向下滾動一個視窗高度
+          window.scrollBy({
+            top: window.innerHeight,
+            behavior: 'smooth'
+          });
+        }
+      });
+
+    });
+  </script>
+</body>
+
+</html>

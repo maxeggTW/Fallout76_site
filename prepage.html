@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fallout 76 - 網站導覽頁</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .landing-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-image: url('./IMAGES/prepage.jpg');
+            background-size: cover;
+            background-position: center;
+            background-color: #000;
+            cursor: pointer;
+            /* 加入淡出效果的過渡 */
+            transition: opacity 1s ease;
+        }
+
+        .logo-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .landing-container:hover .logo-container {
+            opacity: 2;
+        }
+
+        .logo-wrapper {
+            position: relative;
+            margin-left: 5%;
+            width: 950px;
+            height: 312px;
+        }
+
+        /* Fallout文字部分 */
+        .text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 663px;
+            height: 312px;
+        }
+
+        /* 齒輪和76 */
+        .gear-wrapper {
+            position: absolute;
+            top: 0px;
+            left: 700px;
+            width: 250px;
+            height: 250px;
+        }
+
+        /* 齒輪旋轉 */
+        .gear {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: rotate 10s linear infinite;
+        }
+
+        /* 76數字不動 */
+        .number {
+            position: absolute;
+            left: -26pt;
+            top:-40px ;
+            width: 130%;
+            height: 130%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+           
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* 淡出效果的遮罩 */
+        .fade-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+    <!-- 淡出效果遮罩 -->
+    <div id="fadeOverlay" class="fade-overlay"></div>
+
+    <div class="landing-container" id="landingPage">
+        <div class="logo-container" id="logoContainer">
+            <div class="logo-wrapper">
+                <!-- Fallout文字部分 -->
+                <img src="./IMAGES/fallout.png" alt="Fallout文字" class="text">
+                
+                <div class="gear-wrapper">
+                    <!-- 齒輪 -->
+                    <div class="gear" style="background: url('./IMAGES/gear.png') no-repeat; background-size: contain;"></div>
+                    
+                    <!-- 不旋轉的76數字 -->
+                    <img src="./IMAGES/76.png" alt="76數字" class="number">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Logo容器點擊事件
+        document.getElementById('logoContainer').addEventListener('click', function() {
+            fadeAndRedirect('index_P01.html');
+        });
+
+        // 修改淡出並跳轉函數
+function fadeAndRedirect(url) {
+    // 顯示黑色遮罩（淡出效果）
+    const overlay = document.getElementById('fadeOverlay');
+    overlay.style.opacity = '1';
+    
+    // 等待淡出效果完成後跳轉，並在URL中添加參數
+    setTimeout(function() {
+        window.location.href = url + '?fadeIn=true';
+    }, 1000); // 延遲時間與CSS過渡時間匹配
+}
+    </script>
+</body>
+</html>

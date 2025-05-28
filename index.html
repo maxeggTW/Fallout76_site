@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fallout 76 網站</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Microsoft JhengHei", Arial, sans-serif;
+      }
+
+      body {
+        background-color: #f5f5f5;
+      }
+
+      /* 頂部導航欄 */
+      .header {
+        position: relative;
+        width: 100%;
+        background-color: #333;
+        color: white;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 3px solid #5a5a5a;
+      }
+
+      .menu-icon {
+        cursor: pointer;
+        font-size: 24px;
+      }
+
+      .logo {
+        font-weight: bold;
+        font-size: 24px;
+        margin-left: 20px;
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+      }
+
+      /* 搜尋按鈕樣式 */
+      .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-button {
+            width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #4a4a4a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 2;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+        }
+        
+        .search-icon {
+            color: white;
+            font-size: 20px;
+        }
+        
+        .search-input {
+    position: absolute;
+    right: 0;
+    height: 36px;
+    width: 0;
+    padding: 0;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    background-color: white;
+    transition: width 0.3s ease, padding 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    opacity: 0; /* 初始時完全透明 */
+    visibility: hidden; /* 初始時隱藏 */
+        }
+        
+        .search-container.active .search-input {
+            width: 240px;
+    padding: 0 15px;
+    opacity: 1; /* 顯示時完全不透明 */
+    visibility: visible; /* 顯示時可見 */
+        }
+        
+        .search-container.active .search-button {
+            background-color: #6c6c6c;
+        }
+
+      .login-btn {
+        background-color: #f8d24a;
+        color: black;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 15px;
+        cursor: pointer;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        margin-left: 10px;
+      }
+
+      .login-btn img {
+        width: 16px;
+        height: 16px;
+        margin-left: 5px;
+      }
+
+      /* 其餘樣式保持不變 */
+      /* 輪播區 */
+      .carousel-container {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .carousel {
+        width: 100%;
+        position: relative;
+        height: 900px; /* 設定固定高度 */
+      }
+
+      .carousel-slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        visibility: hidden;
+        /* 添加easeout動畫效果 */
+        transition: opacity 1.5s cubic-bezier(0, 0, 0.2, 1),
+          visibility 1s cubic-bezier(0, 0, 0.2, 1);
+        z-index: 1;
+      }
+
+      .carousel-slide.active {
+        opacity: 1;
+        visibility: visible;
+        z-index: 2;
+      }
+
+      .carousel img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .carousel-content {
+        position: absolute;
+        bottom: 40px;
+        right: 40px;
+        text-align: right;
+        /* 添加文字動畫效果 */
+        transform: translateY(20px);
+        opacity: 0;
+        transition: transform 0.8s cubic-bezier(0, 0, 0.2, 1),
+          opacity 0.8s cubic-bezier(0, 0, 0.2, 1);
+        transition-delay: 0.8s;
+      }
+
+      .carousel-slide.active .carousel-content {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .carousel-text {
+        color: red;
+        font-size: 50px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      }
+
+      .buy-now-btn {
+        background-color: #f8d24a;
+        color: black;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 16px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+      }
+
+      .buy-now-btn:hover {
+        background-color: #ffcc00;
+        transform: scale(1.05);
+      }
+
+      .buy-now-btn2 {
+        background-color: #12a8f9;
+        color: black;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 16px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+      }
+
+      .buy-now-btn2:hover {
+        background-color: #89e9ff;
+        transform: scale(1.05);
+      }
+      .buy-now-btn3 {
+        background-color: #09bea3;
+        color: black;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 16px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+      }
+
+      .buy-now-btn3:hover {
+        background-color: #02dfc9;
+        transform: scale(1.05);
+      }
+
+      .carousel-dots {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        z-index: 10;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        background-color: white;
+        border-radius: 50%;
+        margin: 0 5px;
+        cursor: pointer;
+        transition: background-color 0.3s cubic-bezier(0, 0, 0.2, 1),
+          transform 0.3s cubic-bezier(0, 0, 0.2, 1);
+      }
+
+      .dot.active {
+        background-color: #f8d24a;
+        transform: scale(1.2);
+      }
+
+      .carousel-arrows {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        transform: translateY(-50%);
+        z-index: 10;
+      }
+
+      .arrow {
+        font-size: 24px;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.3);
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 50%;
+        margin: 0 10px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+      }
+
+      .arrow:hover {
+        background-color: rgba(0, 0, 0, 0.6);
+        transform: scale(1.1);
+      }
+
+      /* 社交媒體欄 */
+      .social-bar {
+        background-color: #333;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        padding: 25px 0;
+        display: flex;
+        justify-content: space-between; /* 文字靠左，圖標靠右 */
+        align-items: center;
+      }
+
+      .social-text {
+        color: white;
+        font-size: 30px;
+        font-weight: bold;
+        margin-left: 30pt;
+        margin-bottom: 1pt;
+      }
+
+      .social-icons {
+        display: flex;
+        justify-content: flex-end; /* 圖標靠右對齊 */
+        flex: 1;
+      }
+
+      .social-icon {
+        margin: 0 30px;
+        color: white;
+        font-size: 50px;
+        cursor: pointer;
+      }
+
+      .social-icon img {
+        width: 100px;
+        height: 100px;
+        filter: brightness(10); /* 確保圖標為白色 */
+      }
+      /* 分類選單 */
+      .category-menu {
+        background-color: #7b86f8; /* 保持原有的藍色背景 */
+        padding: 15px 0;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      /* 創建一個黃色背景容器來包含所有按鈕 */
+      .category-container {
+        background-color: #ffd54f; /* 黃色背景 */
+        border-radius: 10px; /* 圓角邊框 */
+        padding: 10px 15px; /* 內邊距 */
+        display: flex;
+        justify-content: space-between; /* 按鈕平均分布 */
+        align-items: center;
+        max-width: 600px; /* 限制寬度，可以根據需要調整 */
+        width: 95%; /* 佔整個區域的寬度比例 */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 輕微的陰影效果 */
+        border: 2px dashed white; /* 添加虛線邊框 */
+      }
+
+      .category-btn {
+        background-color: white; /* 白色按鈕 */
+        border-radius: 20px; /* 圓角按鈕 */
+        border: none;
+        padding: 8px 15px;
+        margin: 5px;
+        cursor: pointer;
+        font-weight: bold; /* 加粗文字 */
+        transition: background-color 0.3s ease, transform 0.3s ease;
+      }
+
+      .category-btn:hover {
+        background-color: #f0f0f0;
+        transform: scale(1.05);
+      }
+      /* 內容區塊 */
+      .content-section {
+        background-color: #7b86f8;
+        padding: 20px;
+      }
+
+      .section-title {
+        color: white;
+        margin-bottom: 20px;
+        font-size: 18px;
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        margin-bottom: 30px;
+      }
+
+      .content-card {
+        background-color: #f0f0f0;
+        border-radius: 10px;
+        height: 120px;
+        transition: transform 0.3s cubic-bezier(0, 0, 0.2, 1);
+      }
+
+      .content-card:hover {
+        transform: translateY(-5px);
+      }
+      /* 手機設備（寬度小於 768px） */
+@media (max-width: 767px) {
+    .header {
+        padding: 10px;
+    }
+    .logo {
+        font-size: 18px;
+        margin-left: 10px;
+    }
+    .login-btn {
+        font-size: 12px;
+        padding: 5px 8px;
+    }
+    .carousel {
+        height: 400px;
+    }
+    .carousel-text {
+        font-size: 24px;
+    }
+    .buy-now-btn, .buy-now-btn2, .buy-now-btn3 {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+    .social-text {
+        font-size: 20px;
+        margin-left: 10px;
+    }
+    .social-icon {
+        font-size: 30px;
+        margin: 0 10px;
+    }
+    .category-container {
+        flex-direction: column;
+        padding: 10px;
+    }
+    .category-btn {
+        width: 100%;
+        margin: 5px 0;
+    }
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 平板設備（寬度 768px 到 1024px） */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .carousel {
+        height: 600px;
+    }
+    .carousel-text {
+        font-size: 36px;
+    }
+    .category-container {
+        flex-wrap: wrap;
+    }
+    .category-btn {
+        width: 48%;
+        margin: 5px 1%;
+    }
+    .content-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 桌面設備（寬度大於 1024px） */
+@media (min-width: 1025px) {
+    .content-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+    </style>
+  </head>
+  <body>
+    <!-- 頂部導航欄 -->
+    <div class="header">
+      <div class="menu-icon">☰</div>
+      <div class="logo">LOGO</div>
+      <div class="header-right">
+        <div class="search-container" id="searchContainer">
+          <div class="search-button" id="searchBtn">
+            <div class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></i></div>
+          </div>
+          <input type="text" class="search-input" id="searchInput" placeholder="搜尋...">
+        </div>
+        <button class="login-btn">SIGN IN <img src="user-icon.png" alt="user"></button>
+      </div>
+    </div>
+
+    <div class="carousel-container">
+      <div class="carousel-arrows">
+        <div class="arrow" id="prevBtn">&#10094;</div>
+        <div class="arrow" id="nextBtn">&#10095;</div>
+      </div>
+      <div class="carousel">
+        <div class="carousel-slide active">
+          <img src="./p1.jpg" alt="Fallout 76 橫幅1" />
+          <div class="carousel-content">
+            <div class="carousel-text">還沒有Fallout76?</div>
+            <button class="buy-now-btn">立即購買</button>
+          </div>
+        </div>
+        <div class="carousel-slide">
+          <img src="./p2.png" alt="Fallout 76 橫幅2" />
+          <div class="carousel-content">
+            <div class="carousel-text">最新屍鬼更新即將上線!</div>
+            <button class="buy-now-btn2">最新賽季資訊</button>
+          </div>
+        </div>
+        <div class="carousel-slide">
+          <img src="./p3.jpg" alt="Fallout 76 橫幅3" />
+          <div class="carousel-content">
+            <div class="carousel-text">全台最大討論版!</div>
+            <button class="buy-now-btn3">巴哈姆特</button>
+          </div>
+        </div>
+        <div class="carousel-slide">
+          <img src="./p4.jpg" alt="Fallout 76 橫幅4" />
+          <div class="carousel-content">
+            <button class="buy-now-btn">其他</button>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-dots">
+        <div class="dot active" data-index="0"></div>
+        <div class="dot" data-index="1"></div>
+        <div class="dot" data-index="2"></div>
+        <div class="dot" data-index="3"></div>
+      </div>
+    </div>
+
+    <div class="social-bar">
+      <div class="social-text">避難所科技指引(社群):</div>
+      <div class="social-icons">
+        <div class="social-icon">
+          <i class="fa-brands fa-instagram"></i>
+        </div>
+        <div class="social-icon">
+          <i class="fa-brands fa-facebook-f"></i>
+        </div>
+        <div class="social-icon">
+          <i class="fa-brands fa-youtube"></i>
+        </div>
+        <div class="social-icon">
+          <i class="fa-brands fa-discord"></i>
+        </div>
+        <div class="social-icon">
+          <i class="fa-brands fa-x-twitter"></i>
+        </div>
+        <div class="social-icon">
+            <i class="fa-brands fa-twitch"></i>
+          </div>
+        </div>
+      </div>
+  
+      <div class="category-menu">
+        <div class="category-container">
+          <button class="category-btn">新手入門</button>
+          <button class="category-btn">資源與訊</button>
+          <button class="category-btn">流派分享</button>
+          <button class="category-btn">每週挑戰</button>
+          <button class="category-btn">其他資訊</button>
+        </div>
+      </div>
+  
+      <div class="content-section">
+        <div class="section-title">新手入門 ></div>
+        <div class="content-grid">
+          <div class="content-card"></div>
+          <div class="content-card"></div>
+          <div class="content-card"></div>
+          <div class="content-card"></div>
+          <div class="content-card"></div>
+          <div class="content-card"></div>
+        </div>
+      </div>
+  
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          // 搜尋框展開功能
+          const searchBtn = document.getElementById("searchBtn");
+          const searchContainer = document.getElementById("searchContainer");
+          const searchInput = document.getElementById("searchInput");
+          
+          searchBtn.addEventListener("click", function() {
+            searchContainer.classList.toggle("active");
+            
+            // 如果搜尋框變為可見，則自動聚焦
+            if (searchContainer.classList.contains("active")) {
+              searchInput.focus();
+            }
+          });
+          
+          // 點擊頁面其他地方時收起搜尋框
+          document.addEventListener("click", function(event) {
+            if (!searchContainer.contains(event.target) && searchContainer.classList.contains("active")) {
+              searchContainer.classList.remove("active");
+            }
+          });
+  
+          // 輪播功能
+          const slides = document.querySelectorAll(".carousel-slide");
+          const dots = document.querySelectorAll(".dot");
+          const prevBtn = document.getElementById("prevBtn");
+          const nextBtn = document.getElementById("nextBtn");
+          let currentSlide = 0;
+          const slideCount = slides.length;
+          let slideInterval;
+          let isTransitioning = false;
+  
+          // 顯示指定的幻燈片
+          function showSlide(index) {
+            if (isTransitioning) return; // 避免動畫播放期間重複觸發
+            isTransitioning = true;
+  
+            // 處理邊界情況
+            if (index >= slideCount) {
+              currentSlide = 0;
+            } else if (index < 0) {
+              currentSlide = slideCount - 1;
+            } else {
+              currentSlide = index;
+            }
+  
+            // 隱藏所有幻燈片並移除所有點的活動狀態
+            slides.forEach((slide) => {
+              slide.classList.remove("active");
+            });
+            dots.forEach((dot) => {
+              dot.classList.remove("active");
+            });
+  
+            // 顯示當前幻燈片並激活相應的點
+            slides[currentSlide].classList.add("active");
+            dots[currentSlide].classList.add("active");
+  
+            // 設置一個計時器，等待動畫完成後重置transitioning狀態
+            setTimeout(() => {
+              isTransitioning = false;
+            }, 1000); // 應與CSS過渡時間匹配
+          }
+  
+          // 自動切換幻燈片
+          function startSlideShow() {
+            slideInterval = setInterval(() => {
+              showSlide(currentSlide + 1);
+            }, 5000); // 每5秒切換一次
+          }
+  
+          // 停止自動切換
+          function stopSlideShow() {
+            clearInterval(slideInterval);
+          }
+  
+          // 初始化輪播
+          startSlideShow();
+  
+          // 點擊前進按鈕
+          nextBtn.addEventListener("click", () => {
+            if (isTransitioning) return; // 避免動畫播放期間重複觸發
+            stopSlideShow(); // 停止自動輪播
+            showSlide(currentSlide + 1);
+            startSlideShow(); // 重新開始自動輪播
+          });
+  
+          // 點擊後退按鈕
+          prevBtn.addEventListener("click", () => {
+            if (isTransitioning) return; // 避免動畫播放期間重複觸發
+            stopSlideShow(); // 停止自動輪播
+            showSlide(currentSlide - 1);
+            startSlideShow(); // 重新開始自動輪播
+          });
+  
+          // 點擊導航點
+          dots.forEach((dot) => {
+            dot.addEventListener("click", function () {
+              if (isTransitioning) return; // 避免動畫播放期間重複觸發
+              stopSlideShow(); // 停止自動輪播
+              const slideIndex = parseInt(this.getAttribute("data-index"));
+              showSlide(slideIndex);
+              startSlideShow(); // 重新開始自動輪播
+            });
+          });
+  
+          // 鼠標懸停在輪播上時暫停自動輪播
+          const carouselContainer = document.querySelector(".carousel-container");
+          carouselContainer.addEventListener("mouseenter", stopSlideShow);
+          carouselContainer.addEventListener("mouseleave", startSlideShow);
+  
+          // 確保輪播文字內容已經顯示在第一張幻燈片上
+          setTimeout(() => {
+            const activeSlide = document.querySelector(".carousel-slide.active");
+            const carouselContent =
+              activeSlide.querySelector(".carousel-content");
+            carouselContent.style.opacity = "1";
+            carouselContent.style.transform = "translateY(0)";
+          }, 100);
+  
+          console.log("輪播功能已啟動，帶有easeout動畫效果");
+        });
+      </script>
+    </body>
+  </html>

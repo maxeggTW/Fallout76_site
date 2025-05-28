@@ -1,0 +1,989 @@
+/* --- 全域與基本設定 --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Microsoft JhengHei", Arial, sans-serif; 
+}
+
+body {
+  background-color: #f5f5f5; /* 背景色備用 */
+  background-image: url('./IMAGES/Background.png');
+  background-attachment: fixed; /* 固定背景圖 */
+  background-size: cover; /* 背景圖填滿 */
+  background-position: center; /* 背景圖置中 */
+  background-repeat: no-repeat; /* 背景圖不重複 */
+  position: relative;
+  min-height: 100vh;
+  color: #fff; /* 預設文字顏色 */
+  overflow-x: hidden; /* 隱藏水平滾動條 */
+}
+
+/* 半透明覆蓋層，增加文字可讀性 */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 20, 0.75);
+  z-index: -1;
+}
+
+/* 確保內容在覆蓋層之上 */
+.carousel-container,
+.social-bar,
+.content,
+.contentR,
+.contentL,
+.outsidelink,
+.footer,
+.category-menu { 
+  position: relative;
+  z-index: 1;
+}
+
+/* --- 頁首 --- */
+.header-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 5%;
+  z-index: 100;
+}
+
+.logo {
+  max-width: 250px;
+}
+
+.game-logo {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.sign-in-btn {
+  background: transparent;
+  border: 2px solid #ffcc00;
+  color: #ffcc00;
+  padding: 8px 20px;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.sign-in-btn:hover {
+  background: #ffcc00;
+  color: #000;
+}
+
+.sign-in-btn i {
+  font-size: 1.1rem;
+}
+
+/* --- 輪播 --- */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel {
+  width: 100%;
+  position: relative;
+  height: 80vh;
+  min-height: 900px;
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+  z-index: 1;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 2;
+}
+
+.carousel img { /* 輪播背景圖 */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.carousel-content {
+  position: absolute;
+  bottom: 60px;
+  right: 5%;
+  text-align: right;
+  transform: translateY(20px);
+  transition: transform 0.8s cubic-bezier(0, 0, 0.2, 1), opacity 0.8s cubic-bezier(0, 0, 0.2, 1);
+  transition-delay: 0.5s;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.carousel-slide.active .carousel-content {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.carousel-text {
+  color: #f8d24a;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.buy-now-btn, .buy-now-btn2, .buy-now-btn3, .buy-now-btn4 {
+  color: black;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.buy-now-btn { background-color: #f8d24a; }
+.buy-now-btn:hover { background-color: #ffde7a; transform: scale(1.05); }
+
+.buy-now-btn2 { background-color: #12a8f9; }
+.buy-now-btn2:hover { background-color: #6ecfff; transform: scale(1.05); }
+
+.buy-now-btn3 { background-color: #ea843f; }
+.buy-now-btn3:hover { background-color: #edaa7a; transform: scale(1.05); }
+
+.buy-now-btn4 { background-color: #09bea3; }
+.buy-now-btn4:hover { background-color: #0cdac1; transform: scale(1.05); }
+
+
+.carousel-dots {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  z-index: 10;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  margin: 0 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.dot.active {
+  background-color: #f8d24a;
+  transform: scale(1.1);
+}
+
+.carousel-arrows {
+  position: absolute;
+  top: 50%;
+  width: 95%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: space-between;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.arrow {
+  font-size: 2rem;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  pointer-events: auto;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.arrow:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+  transform: scale(1.1);
+}
+
+/* --- 社群媒體列 --- */
+.social-bar {
+  background-color: #282828;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  padding: 10px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  border-bottom: 1px solid #fff;
+}
+
+.social-text {
+  color: #e0e0e0;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.social-icons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.social-icon {
+  color: #cccccc;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icon:hover {
+  color: #ffcc00;
+  transform: scale(1.15);
+}
+
+/* --- Pip-Boy 向下捲動箭頭 --- */
+.scroll-down-container {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  cursor: pointer;
+  transition: transform 0.5s ease-out;
+}
+
+.pipboy-arrow-down {
+  width: 0;
+  height: 0;
+  border-left: 18px solid transparent;
+  border-right: 18px solid transparent;
+  border-top: 24px solid #3FCD56;
+  position: relative;
+  animation:
+    pip-bounce 2s ease-in-out infinite,
+    pip-pulse-glow 1.8s ease-in-out infinite;
+  will-change: filter, transform;
+}
+
+.pipboy-arrow-down::after {
+  content: "";
+  position: absolute;
+  top: -24px;
+  left: -18px;
+  width: 36px;
+  height: 24px;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 0, 0, 0.2) 50%
+  );
+  background-size: 100% 4px;
+  animation: pip-scanline 1.5s linear infinite;
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+@keyframes pip-bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-8px); }
+  60% { transform: translateY(-4px); }
+}
+
+@keyframes pip-pulse-glow {
+  0% { filter: drop-shadow(0 0 4px rgba(63, 205, 86, 0.7)); }
+  50% { filter: drop-shadow(0 0 12px rgba(63, 205, 86, 1)); }
+  100% { filter: drop-shadow(0 0 4px rgba(63, 205, 86, 0.7)); }
+}
+
+@keyframes pip-scanline {
+  from { background-position: 0 0; }
+  to { background-position: 0 -4px; }
+}
+
+
+
+/* 通用區塊樣式 */
+.content, .contentR, .contentL {
+  padding-top: 150px;
+  padding-bottom: 200px;
+  margin-bottom: 60px;
+}
+.content{
+  background-color: hsl(0, 0%, 10%);
+  z-index: 1;
+}
+
+/* 通用容器樣式 */
+.content .container,
+.contentR .container,
+.contentL .container {
+  max-width: 1140px;
+  /* 讓 Bootstrap 自動處理置中 (margin: 0 auto;) */
+}
+
+/* 通用文字區塊容器 */
+.content-text, /* 用於第一個 section */
+.contentR-text,
+.contentL-text {
+  padding:0px; /* 內部文字padding */
+}
+
+/* 通用標題 */
+
+
+.content .content-text {
+  margin: -10px;
+  text-align: center; /* 新增：讓內部文字、標題、段落置中 */
+}
+
+.content .content-text h2 {
+  font-weight: bold;
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+}
+
+
+.contentR-text h2,
+.contentL-text h2 {
+  font-size: 2.2rem; /* 稍微統一標題大小，可再調整 */
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  margin-bottom: 25px;
+}
+
+.content .content-text p {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+
+/* 通用段落 */
+.contentR-text p,
+.contentL-text p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #e0e0e0;
+  margin-bottom: 20px;
+}
+
+/* 特定文字區塊微調 */
+.contentR .contentR-text {
+   text-align: right; 
+
+}
+
+
+/* 通用黃色箭頭 */
+.contentL .yellow-arrowL img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  margin: 0 0 20px 0; 
+  display: block;
+}
+.contentR .yellow-arrowR img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  margin-left: auto;
+  margin-right: 0;
+  display: block;
+}
+
+
+
+.contentL .yellow-arrowL img {
+  transform: scaleX(-1); /* 保持 L 的翻轉 */
+}
+
+
+
+
+/* 通用按鈕  */
+.content .content-text .btn,
+.content .content-text.fade-in .btn,
+.contentR .btn,
+.contentR .fade-in .btn,
+.contentL .btn,
+.contentL .fade-in .btn {
+  display: inline-flex;
+  align-items: center;
+  color: #000;
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+  border: none;
+}
+.content .content-text .btn{
+  color: #000;
+}
+
+.contentR .btn:hover,
+.contentR .fade-in .btn:hover,
+.contentL .btn:hover,
+.contentL .fade-in .btn:hover {
+  background-color:#f9f45b;
+  transform: translateY(-2px) scale(1.03);
+}
+
+
+.content .content-text .btn:hover,
+.content .content-text.fade-in .btn:hover{ 
+  background-color: #6cb3f5;
+  transform: translateY(-2px) scale(1.03);
+}
+
+/* 第一個 section 的按鈕有 btn-warning, btn-lg class */
+.content .content-text .btn-warning.btn-lg {
+  font-size: 1.1rem; 
+  padding: 14px 35px;
+}
+
+
+/* 通用內容圖片樣式 */
+.content-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto; /* 在其 col-md-6 欄位中置中 */
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  border: 3px solid #ffffff;
+}
+
+.content .side-image img.img-fluid { 
+  max-width: 80%;
+  max-height: 80%;
+  height: auto;
+   border-radius: 15px;
+   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+   border: 3px solid #ffcc00;
+   margin-left: 100px;
+}
+
+
+/* --- 外部連結區塊 --- */
+.outsidelink {
+  background-color: #0a101a;
+ 
+  position: relative;
+  overflow: hidden;
+  min-height: 550px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.outsidelink-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 2;
+  flex-wrap: nowrap; /* 防止換行 */
+  gap: 15px;
+  width: 100%;
+}
+
+.outsidelink-title h2 {
+  color: white;
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin: 0;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+ 
+}
+
+.vaultLogo {
+  width: 40px;
+  height: auto;
+  vertical-align: middle;
+  margin: 0;
+  flex-shrink: 0; /* 防止 logo 縮小 */
+}
+
+.gear-left,
+.gear-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 300px;
+  max-width: 40%;
+  height: auto;
+  z-index: 1;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.gear-left { left: -80px; }
+.gear-right { right: -80px; }
+
+.links-container { 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 30px;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 900px;
+}
+
+.link1, .link2, .link3 {
+  width: clamp(200px, 30%, 280px);
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: block;
+}
+
+.link1 {
+ width: clamp(300px, 45%, 450px);
+}
+
+.link1:hover, .link2:hover, .link3:hover {
+  transform: scale(1.04) translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* --- 頁尾 --- */
+.footer {
+  background-color: #1c1c1c;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  padding: 30px 5%;
+  margin-top: 0;
+  color: #aaa;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+
+.footer-section h2 {
+  color: #e0e0e0;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  padding-left: 0;
+}
+
+.footer .social-icons {
+  justify-content: center;
+  background-color: transparent;
+  padding-bottom: 0;
+  gap: 25px;
+}
+
+.footer .social-icon {
+  font-size: 1.6rem;
+  color: #bbb;
+}
+
+.footer .social-icon:hover {
+  color: #ffcc00;
+  transform: scale(1.1);
+}
+
+.footer-policy {
+  padding: 15px 0 0 0;
+  margin-top: 20px;
+  border-top: 1px solid #444;
+  width: 100%;
+}
+
+.footer-policy p {
+  text-align: center;
+  margin: 0;
+  color: #888;
+  font-size: 0.9rem;
+  background-color: transparent;
+}
+
+
+/* --- 淡入動畫 --- */
+.fade-in {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  will-change: opacity, transform;
+  visibility: hidden;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+/* 文字交錯延遲 */
+.content .content-text.fade-in { transition-delay: 0.2s; }
+
+
+.contentR .contentR-text.fade-in { transition-delay: 0.2s; }
+
+
+.contentL .contentL-text.fade-in { transition-delay: 0.2s; }
+
+
+/* 自定義按鈕樣式 */
+.custom-button {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: #ffcc00;
+  color: #000;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+  text-align: center;
+}
+.custom-button:hover {
+  background-color: #f9f45b;
+  transform: translateY(-2px) scale(1.03);
+  color: #000;
+}
+
+
+/* --- 響應式調整 (RWD) --- */
+
+/* 中大螢幕 - 例如 992px 以下 (平板橫向、小型筆電) */
+@media (max-width: 992px) {
+  /* 內容區塊文字置中與寬度調整 */
+  .contentR .contentR-text,
+  .contentL .contentL-text,
+  .content .content-text { /* 也套用到第一個 .content 區塊的文字容器 */
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 90%; /* 限制最大寬度，避免內容太寬 */
+  }
+
+  /* 內容區塊中的箭頭圖片置中 */
+  .contentR .yellow-arrowR img,
+  .contentL .yellow-arrowL img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block; /* 確保 margin auto 生效 */
+  }
+
+  /* 內容區塊中的按鈕改為區塊元素並置中 */
+  .contentR .btn,
+  .contentL .btn,
+  .content .btn { /* 也套用到第一個 .content 區塊的按鈕 */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content; /* 寬度適應內容 */
+    margin-top: 25px; /* 確保與上方內容有足夠間距 */
+  }
+
+  /* 外部連結區塊調整 */
+  .links-container {
+    flex-direction: column; /* 連結改為垂直排列 */
+    gap: 20px; /* 調整連結間的間距 */
+  }
+  .link1, .link2, .link3 {
+    width: 70%; /* 調整連結寬度 */
+    max-width: 350px; /* 設定最大寬度 */
+  }
+  .gear-left, .gear-right {
+    width: 150px; /* 調整齒輪圖片大小 */
+    opacity: 0.4; /* 調整透明度 */
+  }
+  .gear-left { left: -40px; } /* 調整齒輪位置 */
+  .gear-right { right: -40px; } /* 調整齒輪位置 */
+}
+
+/* 中小螢幕 - 例如 768px 以下 (平板直向、大手機) */
+@media (max-width: 768px) {
+  /* 頁首調整 */
+  .header-top {
+    padding: 15px 3%;
+  }
+
+  /* 輪播調整 */
+  .carousel-text {
+    font-size: 1.8rem; /* 輪播文字再小一點 */
+  }
+  .carousel-content {
+    /* 可考慮將文字內容置中，並調整與邊緣的距離 */
+    /* text-align: center; */
+    /* left: 50%; */
+    /* transform: translateX(-50%); */
+    /* width: 90%; */
+    bottom: 40px; /* 調整與底部的距離 */
+    right: 5%; /* 保持在右側，但可依設計調整 */
+    padding: 10px;
+  }
+  .carousel-dots {
+    bottom: 80px; /* 調整點狀導覽與底部的距離 */
+  }
+  .arrow { /* 輪播箭頭縮小 */
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+  }
+
+  /* 社群媒體列調整 */
+  .social-text {
+    font-size: 1rem;
+  }
+  .social-icons {
+    gap: 15px;
+  }
+  .social-icon {
+    font-size: 1.6rem;
+  }
+
+  /* 通用內容區塊標題與段落字體調整 */
+  /* 注意：此處選擇器 .content-text h2, .content-text p 是根據您原RWD區塊的寫法。
+     若要更精確，可能需用 .content .content-text h2 等。請依您HTML結構確認。*/
+  .content-text h2,
+  .contentR-text h2,
+  .contentL-text h2 {
+    font-size: 2rem; /* 標題字體大小 */
+  }
+  .content-text p,
+  .contentR-text p,
+  .contentL-text p {
+    font-size: 0.95rem; /* 段落字體大小 */
+  }
+
+  /* 通用內容區塊上下間距調整 */
+  .content, .contentR, .contentL {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    margin-bottom: 40px;
+  }
+
+  /* 修正堆疊後圖片的邊距 (若有使用如 .side-image) */
+  .content .side-image img.img-fluid {
+    margin-left: auto; /* 改為自動，使其可以配合 text-align: center 或 flex 置中 */
+    margin-right: auto; /* 確保置中 */
+    max-width: 100%; /* 確保不會超出父容器 */
+  }
+
+  /* Bootstrap .row > .col-md-6 會自動堆疊，此處調整堆疊後的間距 */
+  .content .col-md-6 + .col-md-6,
+  .contentR .col-md-6 + .col-md-6,
+  .contentL .col-md-6 + .col-md-6 {
+    margin-top: 30px; /* 為堆疊在下方的欄位增加上間距 */
+  }
+
+  /* 外部連結區塊標題調整 */
+  .outsidelink {
+    min-height: auto; /* 高度由內容決定 */
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+  .outsidelink-title {
+    gap: 10px; /* 標題與logo間距 */
+  }
+  .outsidelink-title h2 {
+    font-size: 1.8rem; /* 標題字體大小 */
+  }
+  .vaultLogo {
+    width: 35px; /* Logo 大小 */
+  }
+}
+
+/* 小型螢幕 - 例如 576px 以下 (一般手機) */
+@media (max-width: 576px) {
+  /* 頁首 Logo 與按鈕再調整 */
+  .header-top {
+    padding: 15px 3%;
+    /* 如果元素開始擠兌，可考慮垂直排列 */
+    /* flex-direction: column; */
+    /* align-items: flex-start; */
+    /* gap: 10px; */
+  }
+  .logo {
+    max-width: 180px; /* Logo 再縮小 */
+  }
+  .sign-in-btn {
+    padding: 6px 15px;
+    font-size: 0.9rem;
+  }
+
+  /* 輪播內容與控制元件 */
+  .carousel-text {
+    font-size: 1.5rem;
+  }
+  .carousel-content {
+    bottom: 30px; /* 底部間距再調整 */
+    /* 若要完全置中 */
+    /* left: 5%; */
+    /* right: 5%; */
+    /* width: 90%; */
+    /* text-align: center; */
+  }
+  .carousel-dots {
+    bottom: 50px; /* 點狀導覽底部間距 */
+  }
+  .dot { /* 點本身也可以微調 */
+      width: 10px;
+      height: 10px;
+      margin: 0 4px;
+  }
+
+  /* 通用內容區塊上下間距再調整 */
+  .content, .contentR, .contentL {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  /* 通用內容區塊標題與段落字體再調整 */
+  /* 同上768px的註解，請依HTML結構確認選擇器 */
+  .content-text h2,
+  .contentR-text h2,
+  .contentL-text h2 {
+    font-size: 1.8rem;
+  }
+  .content-text p,
+  .contentR-text p,
+  .contentL-text p {
+    font-size: 0.9rem;
+  }
+
+  /* 外部連結區塊 */
+  .outsidelink-title h2 {
+    font-size: 1.6rem;
+  }
+  .vaultLogo {
+    width: 30px;
+  }
+  .links-container {
+    gap: 15px;
+  }
+  .link1, .link2, .link3 {
+    width: 80%; /* 連結寬度調整 */
+    max-width: 300px;
+  }
+  .gear-left, .gear-right {
+    width: 100px; /* 齒輪再縮小 */
+    opacity: 0.3;
+  }
+  .gear-left { left: -30px; }
+  .gear-right { right: -30px; }
+
+  /* 頁尾調整 */
+  .footer-section h2 {
+    font-size: 1.3rem;
+  }
+  .footer .social-icon {
+    font-size: 1.4rem;
+  }
+  .footer-policy p {
+    font-size: 0.8rem;
+  }
+}
+
+/* 更小螢幕 - 例如 480px 以下 (小手機直向) */
+@media (max-width: 480px) {
+  .carousel-text {
+    font-size: 1.4rem; /* 極小螢幕的輪播文字 */
+  }
+  .carousel-content {
+    bottom: 20px; /* 讓內容更往上一些 */
+    padding: 8px;
+  }
+  .carousel-dots {
+      bottom: 110px; /* 點狀導覽與底部距離 */
+  }
+  .carousel-arrows { /* 在非常小的螢幕，可以考慮隱藏左右箭頭 */
+    /* display: none; */
+  }
+  .pipboy-arrow-down { /* 向下滾動箭頭也可以微調 */
+      border-left-width: 15px;
+      border-right-width: 15px;
+      border-top-width: 20px;
+  }
+  .pipboy-arrow-down::after {
+      top: -20px;
+      left: -15px;
+      width: 30px;
+      height: 20px;
+  }
+}
+
+/* 極小螢幕 - 例如 400px 以下 (非常窄的手機) */
+@media (max-width: 400px) {
+  .carousel-content {
+    bottom: 20px; /* 讓內容更往上一些 */
+    padding: 8px;
+  }
+
+  .header-top { /* 頁首元素強制垂直排列並置中 */
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo {
+    max-width: 150px; /* Logo 極限大小 */
+  }
+  .carousel-dots {
+    bottom: 110px; /* 點狀導覽與底部距離 */
+}
+
+  .gear-left, .gear-right { /* 在極小螢幕隱藏齒輪，避免畫面擁擠 */
+    display: none;
+  }
+}
+
+

@@ -1,0 +1,1011 @@
+/* --- 全域與基本設定 --- */
+@font-face {
+  font-family: "Sole Survivor";
+  src: url("./font/SoleSurvivor.ttf") format("truetype");
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Microsoft JhengHei", Arial, sans-serif;
+}
+
+body {
+  background-color: #f3f1ce;
+  min-height: 100vh;
+  color: #ffffff;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+/* --- 頁首---- */
+.header {
+  position: relative;
+  width: 100%;
+  min-width: 900px;
+  overflow: hidden; /* 防止負邊距造成水平捲軸 */
+  display: flex;
+  flex-direction: column;
+  background-color: #183c5d;
+}
+
+.header-image {
+  position: relative;
+  width: 100%;
+  height: 900px;
+  min-height: 900px;
+  margin: 0;
+  padding: 0;
+  transition: all 0.3s;
+}
+
+.header-image img {
+  max-width: 80%;
+  max-height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+  display: block; /* 移除 inline 元素的預設間距 */
+  margin-left: -230px; /* 確保完全靠左 */
+  padding: 0;
+  transition: all 0.3s;
+}
+
+.header-text {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+  color: white;
+  text-align: left;
+  max-width: 40%;
+}
+
+.header-text-title1 {
+  font-family: "Sole Survivor", cursive;
+  padding-bottom: 20px;
+  padding-left: 50px;
+  font-size: 5rem;
+  font-weight: bolder;
+  font-weight: bold;
+  margin-left: 20px;
+  letter-spacing: 8px;
+  text-shadow: -1px -1px 0 #000, /* 左上 */ 1px -1px 0 #000,
+    /* 右上 */ -1px 1px 0 #000, /* 左下 */ 2px 2px 0 #000; /* 右下 */
+}
+.header-text-title2 {
+  padding-left: 350px;
+  font-size: 3.5rem;
+  font-weight: bold;
+}
+
+.header-text p {
+  text-align: justify;
+  padding-top: 50px;
+  padding-right: 50px;
+  font-size: 1.5rem;
+  line-height: 2;
+  font-weight: normal;
+  word-wrap: break-word;
+  word-break: break-all; /* 強制換行 */
+  white-space: pre-wrap; /* 保留換行和空格 */
+  width: 100%; /* 確保寬度限制生效 */
+}
+
+.logo {
+  width: 20px;
+  height: auto;
+  margin-right: 20px;
+}
+
+/* --- 導航列 --- */
+.navbar {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end; /* 內容靠右對齊 */
+  padding-right: 30px; /* 右側留些間距 */
+  z-index: 1000; /* 確保導航列在圖片上層 */
+}
+
+.navbar-nav {
+  display: flex;
+  flex-direction: row;
+  gap: 30px; /* 項目之間的間距 */
+  align-items: center;
+}
+
+.navbar-icon {
+  display: flex;
+  gap: 20px;
+  /* background-color: #e3242b; */
+  margin-left: 30px; /* 與主導航的間距 */
+  align-items: center;
+  justify-content: center;
+  /* height: 42px; */
+  margin-bottom: 0;
+  padding: 0 16px;
+}
+
+
+.navbar-icon .nav-item {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* 圖標之間的間距 */
+   /* height: 100%; */
+}
+
+
+.nav-link {
+  color: #fff !important; /* 文字顏色 */
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+  margin-right: 0;
+}
+
+.nav-link:hover {
+  color: #ffcc00 !important; /* 懸停時的顏色 */
+}
+.navbar-icon .nav-link i.fa-basket-shopping {
+    position: relative; /* 設定圖示為相對定位的基準點 */
+    display: inline-block; /* 確保 i 標籤有明確的區塊特性以便定位子元素，如果原先顯示正常則可不加 */
+}
+
+.navbar-icon .nav-link i.fa-basket-shopping .badge.text-bg-info {
+    position: absolute;     /* 設定徽章為絕對定位 */
+    top: -8px;              /* 向上偏移，可依據您的視覺需求調整 */
+    right: -8px;             /* 向右偏移，可依據您的視覺需求調整 */
+    font-size: 0.7rem;      /* 建議使用固定單位或相對於根元素的單位，例如 rem，使其大小更可控 */
+                            /* 40% 可能會太小，0.7rem 大約是 11.2px (假設根字體是 16px) */
+    padding: 0.2em 0.5em;   /* 調整內邊距讓徽章更好看 */
+    border-radius: 0.75rem;   /* 圓角，可以調整成更圓或膠囊狀 */
+    line-height: 1;         /* 確保文字在徽章內垂直居中 */
+}
+
+
+.navbar-collapse {
+  justify-content: flex-end; 
+  /* Bootstrap 的 navbar 內容靠右 */
+ 
+}
+
+.container {
+  max-width: 5000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 30px;
+}
+/* --- 展開式搜尋框樣式 --- */
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* 讓內容物靠右，以便向左展開 */
+}
+
+.search-input {
+    width: 0;
+    padding: 6px 0; /* 垂直 padding 配合導航列 */
+    border: none;
+    outline: none;
+    opacity: 0;
+    font-size: 1rem;
+    color: #333;
+    background-color: #fff;
+    border-radius: 20px;
+    transition: width 0.4s ease, opacity 0.4s ease, padding 0.4s ease;
+    margin-right: -38px; /* 關鍵：讓輸入框藏在按鈕後面 */
+    z-index: 1;
+}
+
+.search-container.active .search-input {
+    width: 200px; /* 展開後的寬度 */
+    opacity: 1; /* 完全可見 */
+    padding: 6px 15px;
+    border: 1px solid #ffcc00;
+    margin-right: 0; /* 恢復 margin */
+}
+
+.search-btn {
+    /* 讓按鈕樣式與其他圖示一致 */
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    width: 40px; /* 給定固定寬高 */
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10; /* 確保按鈕在最上層 */
+    transition: transform 0.2s ease;
+}
+.search-btn i {
+    color: #fff;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.search-btn:hover i {
+    color: #ffcc00 !important;
+}
+
+.scroll-down-container {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  cursor: pointer;
+  transition: transform 0.5s ease-out;
+}
+
+.pipboy-arrow-down {
+  width: 0;
+  height: 0;
+  border-left: 18px solid transparent;
+  border-right: 18px solid transparent;
+  border-top: 24px solid rgba(111, 255, 44, 0.6);
+
+  position: relative;
+  animation: pip-bounce 2s ease-in-out infinite,
+    pip-pulse-glow 1.8s ease-in-out infinite;
+  will-change: filter, transform;
+}
+
+.pipboy-arrow-down::after {
+  content: "";
+  position: absolute;
+  top: -24px;
+  left: -18px;
+  width: 36px;
+  height: 24px;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 0, 0, 0.2) 50%
+  );
+  background-size: 100% 4px;
+  animation: pip-scanline 1.5s linear infinite;
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+@keyframes pip-bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-8px);
+  }
+  60% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes pip-pulse-glow-red {
+  /* 可以改個名字方便區分 */
+  0%,
+  100% {
+    filter: drop-shadow(0 0 4px rgba(255, 0, 0, 0.7));
+  } /* 稍暗的紅色光暈 */
+  50% {
+    filter: drop-shadow(0 0 12px rgba(255, 50, 50, 1));
+  } /* 較亮的紅色光暈 (或用 255,0,0,1) */
+}
+
+@keyframes pip-scanline {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 -4px;
+  }
+}
+
+/* --- 主打商品--- */
+.featured {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.featured-title {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 40px;
+  justify-content: center; /* 添加水平置中 */
+}
+.featured-title h3 {
+  color: #000;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.featured-title img {
+  width: 50px;
+  height: 50px;
+}
+.featured-merch {
+  max-width: 5000px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.merch-item {
+  position: relative;
+  width: calc(50% - 20px);
+  height: 600px;
+  width: calc(50% - 20px); /* 調整這個數值可以改變圖片大小 */
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.merch-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* 【新增】為 hover 效果加上平滑過渡 */
+  transition: transform 0.3s ease; /* 針對 transform 屬性，持續 0.3 秒，緩動效果 */
+}
+.merch-item:hover img {
+  /* 將 hover 綁定在 .merch-item 上，這樣滑鼠在整個項目區塊內移動都會觸發圖片效果 */
+  transform: scale(1.05); /* 將圖片放大 5% */
+}
+
+.hotmerch-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: none;
+  text-align: left;
+  color: white;
+  width: 100%;
+  padding: 15px 20px 120px; /* 調整 padding */
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0)
+  ); /* 【可選】加個從下到上的黑色漸層背景，讓文字更清晰 */
+  box-sizing: border-box; /* 確保 padding 不會影響寬度 */
+  z-index: 5; /* 確保文字在圖片之上 */
+}
+
+.hotmerch-text h2 {
+  font-family: "Sole Survivor", cursive;
+  font-size: 2.5rem; /* 您原有的設定 */
+  font-size: 1.8rem; /* 【微調】 稍微縮小一點字體 */
+  margin-bottom: 5px; /* 調整間距 */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* 加強文字陰影 */
+}
+
+.hotmerch-text h3 {
+  font-size: 1.8rem;
+  font-size: 1.3rem; /* 稍微縮小一點字體 */
+  margin-bottom: 0; /* 移除或調整間距 */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* 加強文字陰影 */
+}
+
+.merch-btn {
+  position: absolute;
+  bottom: 40px;
+  right: 20px;
+  background-color: #ffcc00;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 6;
+}
+
+.merch-btn:hover {
+  background-color: #f9f45b;
+  transform: scale(1.05);
+}
+
+/* 預購商品 */
+
+.preorder {
+  width: 100%;
+  padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.preorder-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 40px;
+  margin-top: 30px;
+  /* margin-left: -1000px;  */
+}
+
+.preorder-title h3 {
+  color: #000;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.preorder-title img {
+  width: 50px;
+  height: 50px;
+}
+
+.preorder-title-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.preorder-title-text h3 {
+  color: #000;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.preorder-title-text p {
+  color: #e3242b;
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.preorder-merch {
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 0 20px;
+}
+
+.preorder-item {
+  width: 220px;
+  min-height: 330px;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.preorder-item:hover {
+  transform: translateY(-5px);
+}
+
+.preorder-item img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.preorder-text {
+  padding: 15px;
+  background: white;
+  min-height: 110px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.preorder-text h2 {
+  color: #000;
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0 0 8px 0;
+  line-height: 1.4;
+  flex-grow: 1;
+}
+
+.preorder-text h3 {
+  color: #e3242b;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* 強力熱銷 */
+
+.hot-sale {
+  width: 100%;
+  padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hot-sale-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 40px;
+  justify-content: center; /* 添加水平置中 */
+}
+
+.hot-sale-title h3 {
+  color: #000;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.hot-sale-title img {
+  width: 50px;
+  height: 50px;
+}
+
+.bigsale-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* 添加水平置中 */
+  height: 400px;
+  width: 1100px;
+  margin: 50px auto; /* 使用 auto 來水平置中 */
+  background-color: #f6c957;
+  gap: 50px;
+}
+
+.bigsale-title h1 {
+  color: #fff;
+  font-size: 6rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.bigsale-title p {
+  color: #fff;
+  font-size: 1.5rem;
+  margin: 0;
+}
+.comment {
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  padding: 50px 200px;
+}
+
+.comment-left,
+.comment-right {
+  display: flex;
+  position: relative;
+}
+
+.comment-right {
+  justify-content: flex-end;
+}
+
+.comment_Boy {
+  width: 90px;
+  height: 110px;
+}
+.comment_Girl {
+  width: 100px;
+  height: 110px;
+}
+
+.comment-text {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.comment-right .comment-text {
+  order: -1;
+  margin-right: 20px;
+  margin-left: 0;
+  text-align: right;
+}
+
+.five-starL,
+.five-starR {
+  position: absolute;
+  width: 100px;
+  height: 20px;
+  top: -25px;
+}
+
+.five-starL {
+  left: 100px;
+}
+
+.five-starR {
+  right: 100px;
+}
+
+.comment-left h3,
+.comment-right h3 {
+  color: #000;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.comment-left p,
+.comment-right p {
+  color: #666;
+  font-size: 1rem;
+  margin-top: 5px;
+}
+
+.disclaimer p {
+  color: #aaa;
+  font-size: 1rem;
+  font-weight: normal;
+  text-align: center;
+}
+
+/* --- 外部連結區塊 --- */
+.outsidelink {
+  background-color: #0a101a;
+  position: relative;
+  overflow: hidden;
+  min-height: 550px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.outsidelink-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 2;
+  flex-wrap: nowrap; /* 防止換行 */
+  gap: 15px;
+  width: 100%;
+}
+
+.outsidelink-title h2 {
+  color: white;
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin: 0;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.vaultLogo {
+  width: 40px;
+  height: auto;
+  vertical-align: middle;
+  margin: 0;
+  flex-shrink: 0; /* 防止 logo 縮小 */
+}
+
+.gear-left,
+.gear-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 500px;
+  height: 700px;
+  z-index: 1;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.gear-left {
+  left: -600px;
+}
+.gear-right {
+  right: -600px;
+}
+
+.links-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 30px;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 900px;
+}
+
+.link1,
+.link2,
+.link3 {
+  width: clamp(200px, 30%, 280px);
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: block;
+}
+
+.link1 {
+  width: clamp(300px, 45%, 450px);
+}
+
+.link1:hover,
+.link2:hover,
+.link3:hover {
+  transform: scale(1.04) translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* --- 頁尾 --- */
+.footer {
+  background-color: #1c1c1c;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  padding: 30px 5%;
+  margin-top: 0;
+  color: #aaa;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+
+.footer-section h2 {
+  color: #e0e0e0;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  padding-left: 0;
+}
+
+.footer .social-icons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: transparent;
+  padding-bottom: 0;
+  gap: 25px;
+}
+
+.footer .social-icon {
+  font-size: 1.6rem;
+  color: #bbb;
+}
+
+.footer .social-icon:hover {
+  color: #ffcc00;
+  transform: scale(1.1);
+}
+
+.footer-policy {
+  padding: 15px 0 0 0;
+  margin-top: 20px;
+  border-top: 1px solid #444;
+  width: 100%;
+}
+
+.footer-policy p {
+  text-align: center;
+  margin: 0;
+  color: #888;
+  font-size: 0.9rem;
+  background-color: transparent;
+}
+
+/* 自定義按鈕樣式 */
+.custom-button {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: #ffcc00;
+  color: #000;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+  text-align: center;
+}
+.custom-button:hover {
+  background-color: #f9f45b;
+  transform: translateY(-2px) scale(1.03);
+  color: #000;
+}
+.search-results-page {
+  flex-grow: 1;
+}
+
+/* 讓主頁的主要內容區塊自動填滿剩餘空間 */
+.content {
+  flex-grow: 1;
+}
+@media (max-width: 992px) {
+  .header-text-title1 {
+    font-size: 3.5rem;
+    padding-left: 20px;
+  }
+  .header-text-title2 {
+    font-size: 2.5rem;
+    padding-left: 50px;
+  }
+  .header-text p {
+    font-size: 1.2rem;
+    padding-right: 20px;
+  }
+
+  .hot-sale-title h3,
+  .preorder-title-text h3,
+  .outsidelink-title h2 {
+    font-size: 1.5rem;
+  }
+
+  .bigsale-title {
+    width: 90%;
+    height: auto;
+    padding: 40px 20px;
+  }
+  .bigsale-title h1 {
+    font-size: 3rem;
+  }
+  .bigsale-title p {
+    font-size: 1.2rem;
+  }
+
+  .preorder-merch {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .preorder-item {
+    width: 45%;
+    margin-bottom: 20px;
+  }
+
+  .comment {
+    padding: 30px 20px;
+    gap: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-text {
+    font-size: 1rem;
+    top: 10%;
+    left: 5%;
+    max-width: 90%;
+  }
+  .header-image img {
+    height: auto;
+  }
+  .navbar-nav {
+    flex-direction: column;
+    background-color: #183c5d;
+    width: 100%;
+    padding: 10px 0;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    z-index: 999;
+  }
+
+  .hot-sale-merch,
+  .preorder-merch {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .merch-item,
+  .preorder-item {
+    width: 90%;
+  }
+
+  .header-text {
+    top: 20%;
+    left: 5%;
+    transform: translateX(0);
+  }
+  .header-text-title1 {
+    font-size: 2.5rem;
+    letter-spacing: 4px;
+  }
+  .header-text-title2 {
+    font-size: 2rem;
+    padding-left: 20px;
+  }
+  .header-text p {
+    font-size: 1rem;
+  }
+
+  .comment-left,
+  .comment-right {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .comment-right .comment-text,
+  .comment-text {
+    margin: 10px 0 0 0;
+    order: initial;
+    text-align: center;
+  }
+
+  .five-starL,
+  .five-starR {
+    display: none;
+  }
+
+  .outsidelink-title {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .gear-left,
+  .gear-right {
+    display: none;
+  }
+
+  .link1,
+  .link2,
+  .link3 {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-text-title1 {
+    font-size: 2rem;
+  }
+  .header-text-title2 {
+    font-size: 1.5rem;
+  }
+  .header-text p {
+    font-size: 0.9rem;
+  }
+
+  .hotmerch-text h2,
+  .hotmerch-text h3 {
+    font-size: 1.2rem;
+  }
+  .merch-btn {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+  .preorder-text h2 {
+    font-size: 0.9rem;
+  }
+  .preorder-text h3 {
+    font-size: 1rem;
+  }
+  .bigsale-title h1 {
+    font-size: 2.5rem;
+  }
+  .bigsale-title p {
+    font-size: 1rem;
+  }
+}
+.prevpage{
+  width: 100%;
+  text-align: center;
+}
