@@ -31,9 +31,6 @@ if (!isset($_SESSION)) {
     </div>
   </section>
 
-  <section class="scontent">
-    <?php require_once("item_scontent.php") ?>
-  </section>
 
   <section class="outsidelink">
     <?php require_once("outsidelink.php") ?>

@@ -186,36 +186,7 @@ if ($product_id && empty($error_message)) {
     });
 
   </script>
-  <script>
-    // 這是搜尋框的 JS
-    document.addEventListener("DOMContentLoaded", function() {
-        const searchContainer = document.getElementById('searchForm');
-        const searchBtn = document.getElementById('searchBtn');
-        const searchInput = document.getElementById('searchInput');
-
-        if(searchContainer && searchBtn && searchInput) {
-            searchBtn.addEventListener('click', () => {
-                searchContainer.classList.toggle('active');
-                if (searchContainer.classList.contains('active')) {
-                    searchInput.focus();
-                }
-            });
-
-            searchContainer.addEventListener('submit', (event) => {
-                if (searchInput.value.trim() === '') {
-                    event.preventDefault(); 
-                    searchContainer.classList.remove('active');
-                }
-            });
-
-            document.addEventListener('click', (event) => {
-                if (!searchContainer.contains(event.target)) {
-                    searchContainer.classList.remove('active');
-                }
-            });
-        }
-    });
-   </script>
+ 
 </body>
 
 </html>

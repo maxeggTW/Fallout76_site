@@ -5,9 +5,19 @@ require_once("php_lib.php");
 if (!isset($_SESSION)) {
   session_start();
 }
-
-
+$image_directory = './IMAGES/';
 ?>
+
+
+<?php $stmt_random = $link->prepare(
+        "SELECT p_id, p_name, p_ename, p_price, p_image_path, p_content
+         FROM product
+         WHERE p_open = 1
+         ORDER BY RAND() -- ✨ 關鍵：使用 RAND() 進行隨機排序
+         LIMIT 5"        // ✨ 關鍵：限制數量為 5
+    );
+    $stmt_random->execute();
+    $random_products = $stmt_random->fetchAll(PDO::FETCH_ASSOC);?>
 <!DOCTYPE html>
 <html lang="zh-TW">
 

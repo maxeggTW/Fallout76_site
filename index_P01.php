@@ -229,7 +229,8 @@
 
 
       // --- 原本第二個監聽器的內容 (淡入效果) ---
-      
+      const fadeElements = document.querySelectorAll('.content-text, .side-image, .contentR-text, .contentL-text');
+
       // 添加 fade-in 類 (如果元素存在) - 最好在 CSS 中預設，而不是用 JS 添加
       // fadeElements.forEach(element => {
       //  element.classList.add('fade-in');

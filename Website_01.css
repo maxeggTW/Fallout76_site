@@ -95,14 +95,13 @@ body::before {
 .carousel-container {
   position: relative;
   width: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .carousel {
   width: 100%;
   position: relative;
-  height: 80vh;
-  min-height: 900px;
+  height: 90vh;
 }
 
 .carousel-slide {

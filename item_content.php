@@ -9,8 +9,6 @@
         echo '<div class="container alert alert-danger text-center"><p>顯示產品主要資訊時發生錯誤，請回報管理員。</p></div>';
       }
 
-      // 在 include 'product.php' 之後，仍然在 if ($product) 區塊內顯示商品詳細介紹
-      // (這部分是您後來新增的，確保它在 $product 存在時才顯示)
       echo '<div class="detail-section" >'; // 給這個區塊一個 class，方便 CSS 定位，並設定文字靠左
       echo '<h1 >商品詳細介紹</h1>'; // 調整標題樣式
 

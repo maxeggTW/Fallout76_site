@@ -13,7 +13,9 @@ body {
   background-color: #fff5d1;
   color: #212529;
   overflow-x: hidden;
-  margin: 0;
+    display: flex;
+  flex-direction: column;
+   min-height: 100vh; 
 }
 /* 特定頁面背景色，例如購物車頁 */
 body.cart-active-page {
@@ -1640,4 +1642,9 @@ a.img-logo {
   .footer .social-icon {
     font-size: 1.2rem;
   }
+}
+
+
+.content {
+  flex-grow: 1;
 }
